@@ -1,3 +1,5 @@
+fs = require('fs');
+
 class Product {
   constructor(name, sellIn, price) {
     this.name = name;
@@ -5,7 +7,6 @@ class Product {
     this.price = price;
   }
 }
-
 // Coverages
 // Low
 // Medium
@@ -24,7 +25,8 @@ class DecreasingCoverage extends Product {
   updateAttributes() {
     // Sell in always decreases
     this.sellIn--;
-    // If coverage is expired, price decreases at double speed
+    // Price decreases over time
+    // If coverage is expired, it decreases at double speed
     const expiredMultiplier = this.sellIn >= 0 ? 1 : 2
     this.price > 0 ? this.price -= 1 * expiredMultiplier : this.price = 0
   }
@@ -38,9 +40,58 @@ class IncreasingCoverage extends Product {
   }
   updateAttributes() {
     this.sellIn--;
-    // If coverage is expired, price increases at double speed
-    const expiredMultiplier = this.sellIn >= 0 ? 1 : 2
-    this.price <= this.maxSellingPrice ? this.price += 1 * expiredMultiplier : this.price = this.maxSellingPrice
+    // Price increases over time
+    // If coverage is expired, it increases at double speed
+    const expiredMultiplier = this.sellIn <= 10 ? 2 : 1
+    this.price < this.maxSellingPrice ? this.price += 1 * expiredMultiplier : this.price = this.maxSellingPrice
+  }
+}
+// Packages that increase their value and sellIn at double speed
+// Special Full Coverage
+class IncreasingCoverageDouble extends IncreasingCoverage {
+  constructor(name, price, sellIn, maxSellingPrice) {
+    super(name, price, sellIn, maxSellingPrice)
+  }
+  updateAttributes() {
+    this.sellIn--;
+    // Price drops to 0 if coverage is expired
+    if (this.sellIn <= 0) { this.price = 0; return };
+    // Else, coverage price increases
+    let expiredMultiplier = 1;
+    if (this.sellIn < 10) expiredMultiplier = 2
+    if (this.sellIn < 5) expiredMultiplier = 3
+    this.price < this.maxSellingPrice ? this.price += 1 * expiredMultiplier : this.price = this.maxSellingPrice
+  }
+}
+
+// Packages that do not change price nor sellIn
+// Mega Coverage
+class constantCoverage extends Product {
+  constructor(name, price, sellIn) {
+    super(name, price, sellIn);
+  }
+  updateAttributes() {
+    //This is a constant coverage
+    return;
+  }
+}
+
+const CoverageAssigner = (coverage) => {
+  switch (coverage.name) {
+    case "Low Coverage":
+    case "Medium Coverage":
+      return new DecreasingCoverage(coverage.name, coverage.sellIn, coverage.price)
+    case "Full Coverage":
+      return new IncreasingCoverage(coverage.name, coverage.sellIn, coverage.price)
+    case "Mega Coverage":
+      return new constantCoverage(coverage.name, coverage.sellIn, coverage.price)
+    case "Special Full Coverage":
+      return new IncreasingCoverageDouble(coverage.name, coverage.sellIn, coverage.price, IncreasingCoverage.maxSellingPrice)
+    case "Super Sale":
+      // Not yet implemented
+      return coverage
+    default:
+      throw new Error("Received unknown product")
   }
 }
 
@@ -50,36 +101,11 @@ class CarInsurance {
   }
   updatePrice() {
     for (var i = 0; i < this.products.length; i++) {
-      let coverage;
-      switch (this.products[i].name) {
-        case "Low Coverage":
-        case "Medium Coverage":
-          coverage = new DecreasingCoverage(this.products[i].name, 
-            this.products[i].sellIn, this.products[i].price)
-          break;
-        case "Full Coverage":
-          coverage = new IncreasingCoverage(this.products[i].name, 
-            this.products[i].sellIn, this.products[i].price)
-          break;
-        case "Mega Coverage":
-          // Not yet implemented
-          break;
-        case "Special Full Coverage":
-          // Not yet implemented
-          break;
-        case "Super Sale":
-          // Not yet implemented
-          break;
-        default:
-          console.log("Unkown Product");
-          break;
+      this.products[i] = CoverageAssigner(this.products[i])
+      if (typeof this.products[i].updateAttributes !== "undefined") {
+        this.products[i].updateAttributes();
       }
-      if(coverage !== undefined){
-        coverage.updateAttributes();
-        this.products[i] = coverage;
-      } 
     }
-
     return this.products;
   }
 }
@@ -97,16 +123,25 @@ const productsAtDayZero = [
 ];
 
 const carInsurance = new CarInsurance(productsAtDayZero);
+let fileContent = 'OMGHAI!\n';
 const productPrinter = function (product) {
-  console.log(`${product.name}, ${product.sellIn}, ${product.price}`);
+  fileContent += `${product.name}, ${product.sellIn}, ${product.price}\n`;
 };
 
-for (let i = 1; i <= 30; i += 1) {
-  console.log(`Day ${i}`);
-  console.log('name, sellIn, price');
-  carInsurance.updatePrice().forEach(productPrinter);
-  console.log('');
+for (let i = 0; i <= 30; i += 1) {
+  fileContent += `-------- day ${i} --------\n`;
+  fileContent += 'name, sellIn, price \n';
+  if (i === 0) carInsurance.products.forEach(productPrinter)
+  else {
+    carInsurance.updatePrice().forEach(productPrinter);
+  }
+  fileContent += ' \n'
 }
+
+fs.writeFile('30-days-test.txt', fileContent, function (err) {
+  if (err) throw new Error("Error writing file");
+  console.log("File saved successfuly")
+});
 
 module.exports = {
   Product,

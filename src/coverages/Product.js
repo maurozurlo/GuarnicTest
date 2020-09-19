@@ -11,11 +11,6 @@ class Product {
         this.sellIn = sellIn;
         this.price = price;
     }
-
-    clamp() {
-        // After the update we cap the price values to a minimum of 0 and a max of 50
-        this.price = Math.max(0, Math.min(this.price, 50))
-    }
 }
 
 class ExpiringProduct extends Product {
@@ -26,8 +21,14 @@ class ExpiringProduct extends Product {
     updateAttributes() {
         this.sellIn--
         this.updatePrice()
+        this.clamp()
     }
-
+    
+    clamp() {
+        // After the update we cap the price values to a minimum of 0 and a max of 50
+        this.price = Math.max(0, Math.min(this.price, 50))
+    }
+    
     updatePrice() {
         return;
     }

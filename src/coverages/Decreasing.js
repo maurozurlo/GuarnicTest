@@ -16,7 +16,6 @@ class DecreasingCoverage extends ExpiringProduct {
 
   decreasePrice(expiredMultiplier) {
     this.price -= 1 * expiredMultiplier;
-    this.clamp()
   }
 }
 // Coverages that increase their value and sellIn at double speed
@@ -25,7 +24,7 @@ class DecreasingCoverageDouble extends DecreasingCoverage {
   constructor(name, price, sellIn) {
     super(name, price, sellIn);
   }
-  
+
   updatePrice() {
     // If coverage is expired, it decreases at double speed
     const expiredMultiplier = this.sellIn >= 0 ? 2 : 4

@@ -15,7 +15,6 @@ class IncreasingCoverage extends ExpiringProduct {
 
   increasePrice(expiredMultiplier) {
     this.price += 1 * expiredMultiplier
-    this.clamp()
   }
 }
 // Coverages that increase their value and sellIn at double speed

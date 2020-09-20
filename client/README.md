@@ -1,6 +1,6 @@
-# Guernic 🐄
+# Guarnic 🐄
 
-A web client for Guernic code challenge.
+A web client for Guarnic code challenge.
 
 ### Requires
 

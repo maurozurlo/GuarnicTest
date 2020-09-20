@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { MehTwoTone } from '@ant-design/icons'
 import { Space, Typography } from 'antd'
 
-import { useTheme } from 'guernic/hooks'
+import { useTheme } from 'guarnic/hooks'
 
 const Center = styled.div`
   align-items: center;

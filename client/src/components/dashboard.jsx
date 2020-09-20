@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Space, Typography } from 'antd'
 import { LineChart, Line } from 'recharts'
-import { useTheme } from 'guernic/hooks'
+import { useTheme } from 'guarnic/hooks'
 
 const data = [
   {

@@ -2,8 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { ThemeProvider } from 'styled-components'
 
-import App from 'guernic/app'
-import theme from 'guernic/theme'
+import App from 'guarnic/app'
+import theme from 'guarnic/theme'
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>

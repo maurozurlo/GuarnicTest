@@ -1,7 +1,7 @@
 {
-  "name": "guernic",
+  "name": "guarnic",
   "version": "0.1.0",
-  "description": "A web client for Guernic code challenge.",
+  "description": "A web client for Guarnic code challenge.",
   "scripts": {
     "build": "npx rimraf dist && npx webpack --config webpack.prod.js",
     "clean": "npx rimraf npm-*.log && npx rimraf package-lock.json && npx -p rimraf rimraf node_modules && npm cache verify",

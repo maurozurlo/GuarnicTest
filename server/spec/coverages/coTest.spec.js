@@ -1,7 +1,7 @@
 const { expect } = require('chai')
-const { Product } = require('../src/coverages/Product');
-const { CarInsurance } = require('../src/coverages/coTest');
-const CoverageAssigner = require('../src/coverages/Helpers.js')
+const { Product } = require('../../src/coverages/Product');
+const { CarInsurance } = require('../../src/coverages/coTest');
+const CoverageAssigner = require('../../src/coverages/Helpers.js')
 
 const productsAtDayZero = [
   new Product('Medium Coverage', 10, 20),

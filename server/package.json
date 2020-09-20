@@ -6,8 +6,7 @@
   "scripts": {
     "dev": "nodemon src/server.js",
     "start": "node src/server.js",
-    "test": "mocha spec/*.js",
-    "after-30-days": "node src/coTest.js"
+    "test": "mocha \"spec/**/*.spec.js\""
   },
   "repository": {
     "type": "git",

@@ -1,6 +1,6 @@
 const { expect } = require('chai')
-
-const { CarInsurance, Product } = require('../src/coTest');
+const { Product } = require('../src/coverages/Product');
+const { CarInsurance } = require('../src/coverages/coTest');
 const CoverageAssigner = require('../src/coverages/Helpers.js')
 
 const productsAtDayZero = [

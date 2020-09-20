@@ -13,6 +13,7 @@ const productsAtDayZero = [
   new Product('Special Full Coverage', 10, 49),
   new Product('Special Full Coverage', 5, 49),
   new Product('Super Sale', 3, 6),
+  new Product('Foo', 3, 6),
 ];
 
 describe("Co Test", function () {
@@ -25,5 +26,10 @@ describe("Co Test", function () {
     const product = CoverageAssigner(productsAtDayZero[1]);
     product.updateAttributes()
     expect(product.price).equal(1);
+  });
+  it("should be constant price, since it's an unknown product", function () {
+    const product = CoverageAssigner(productsAtDayZero[9]);
+    product.updateAttributes && product.updateAttributes()
+    expect(product.price).equal(6);
   });
 });

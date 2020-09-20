@@ -1,7 +1,7 @@
 const { Product } = require("./Product.js")
 // Packages that do not change price nor sellIn
 // Mega Coverage
-class constantCoverage extends Product {
+class ConstantCoverage extends Product {
   constructor(name, price, sellIn) {
     super(name, price, sellIn);
   }
@@ -11,4 +11,4 @@ class constantCoverage extends Product {
   }
 }
 
-module.exports = constantCoverage
+module.exports = ConstantCoverage

@@ -2,16 +2,11 @@ const CoverageAssigner = require('./Helpers.js')
 
 class CarInsurance {
   constructor(products = []) {
-    this.products = products;
+    this.products = products.map(CoverageAssigner)
   }
   updatePrice() {
-    for (var i = 0; i < this.products.length; i++) {
-      this.products[i] = CoverageAssigner(this.products[i])
-      if (typeof this.products[i].updateAttributes !== "undefined") {
-        this.products[i].updateAttributes();
-      }
-    }
-    return this.products;
+    this.products.forEach(product => product.updateAttributes && product.updateAttributes())
+    return this.products
   }
 }
 

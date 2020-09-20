@@ -23,12 +23,12 @@ class ExpiringProduct extends Product {
         this.updatePrice()
         this.clamp()
     }
-    
+
     clamp() {
         // After the update we cap the price values to a minimum of 0 and a max of 50
         this.price = Math.max(0, Math.min(this.price, 50))
     }
-    
+
     updatePrice() {
         return;
     }
@@ -37,4 +37,3 @@ class ExpiringProduct extends Product {
 module.exports = {
     Product, ExpiringProduct
 }
-

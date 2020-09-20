@@ -1,4 +1,4 @@
-const constantCoverage = require('./Constant');
+const ConstantCoverage = require('./Constant');
 const { DecreasingCoverage, DecreasingCoverageDouble } = require('./Decreasing')
 const { IncreasingCoverage, IncreasingCoverageDouble } = require('./Increasing')
 
@@ -10,13 +10,15 @@ const CoverageAssigner = (coverage) => {
         case "Full Coverage":
             return new IncreasingCoverage(coverage.name, coverage.sellIn, coverage.price)
         case "Mega Coverage":
-            return new constantCoverage(coverage.name, coverage.sellIn, coverage.price)
+            return new ConstantCoverage(coverage.name, coverage.sellIn, coverage.price)
         case "Special Full Coverage":
             return new IncreasingCoverageDouble(coverage.name, coverage.sellIn, coverage.price)
         case "Super Sale":
             return new DecreasingCoverageDouble(coverage.name, coverage.sellIn, coverage.price)
         default:
-            throw new Error("Received unknown product")
+            // This currently returns the default product, since the name was not recognized
+            console.error('Received unknown product')
+            return coverage
     }
 }
 

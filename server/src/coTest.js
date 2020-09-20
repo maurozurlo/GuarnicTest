@@ -45,10 +45,10 @@ for (let i = 0; i <= 30; i += 1) {
   fileContent += '\n'
 }
 
-fs.writeFile('30-days-test.txt', fileContent, function (err) {
+/* fs.writeFile('30-days-test.txt', fileContent, function (err) {
   if (err) throw new Error("Error writing file");
   console.log("File saved successfuly")
-});
+}); */
 
 module.exports = {
   Product,

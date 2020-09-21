@@ -1,3 +1,21 @@
+## Guarnic Challenge por Mauro Zurlo
+
+## Desc
+Implementación de una calculadora de precios para una aseguradora de autos, con un servidor en Node.js y un frontend en React
+
+## Start
+Para iniciar el servidor
+- `cd server` y después `npm run start`
+
+Para iniciar el cliente
+- `cd client` y después `npm run start`
+
+## Comandos adicionales en servidor
+- `test` para correr tests
+- `after-30-days` para generar el archivo `30-days-test.txt`
+
+### Original Readme
+
 ## Un Fork or Pull Request a este repo DESCARTA AUTOMÁTICAMENTE la postulación. Envía tu solución en tu propio repo.
 
 # Si eres FRONTEND o FULLSTACK
@@ -30,14 +48,14 @@ La compañía acaba de lanzar un nuevo tipo de producto, *Super Sale product*. E
 
 - **"Super Sale"** Baja el `price` al doble de la velocidad de los productos normales.
 
-Puedes hacer cualquier cambio al metodo `updatePrice`, también agregar todo el código que necesites incluyendo archivos y 
+Puedes hacer cualquier cambio al metodo `updatePrice`, también agregar todo el código que necesites incluyendo archivos y
 clases siempre que todo continúe funcionando correctamente. Sin embargo *NO DEBES* alterar el constructor de la clase `Product`.
 
 
 
 ## Últimas aclaraciones
 
-- Un producto nunca puede tener su `price` por encima de 50, sin embargo **"Mega Coverage"** es un 
+- Un producto nunca puede tener su `price` por encima de 50, sin embargo **"Mega Coverage"** es un
 producto legendario y su `price` es fijo en 80, nunca cambia.
 
 - El archivo `products_after_30_days.txt` muestra el comportamiento de los productos en un período de 30 días.

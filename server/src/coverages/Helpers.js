@@ -2,13 +2,13 @@ const ConstantCoverage = require('./Constant');
 const { DecreasingCoverage, DecreasingCoverageDouble } = require('./Decreasing')
 const { IncreasingCoverage, IncreasingCoverageDouble } = require('./Increasing')
 
-const CoverageChecker = (coverage) => {
-    if (coverage.price > 50 && coverage.price !== 80)
-        console.error(`Invalid price ${coverage.price} for ${coverage.name}`)
-    return true
-}
-
 const CoverageAssigner = (coverage) => {
+    // This currently returns the default product, since the price does not conform to the product rules
+    if (coverage.price > 50 && coverage.price !== 80){
+        console.error(`Invalid price ${coverage.price} for ${coverage.name}`)
+        return coverage
+    }
+
     switch (coverage.name) {
         case "Low Coverage":
         case "Medium Coverage":
@@ -28,4 +28,4 @@ const CoverageAssigner = (coverage) => {
     }
 }
 
-module.exports = { CoverageAssigner, CoverageChecker }
+module.exports = { CoverageAssigner }

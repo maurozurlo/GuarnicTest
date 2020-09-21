@@ -23,13 +23,18 @@ describe("Coverage Assigner Test", () => {
     const product = CoverageAssigner(genericProduct);
     expect(product.constructor.name).equal('DecreasingCoverageDouble');
   })
-  it("should return a ConstantCoverage product class for an unknown product", () => {
+  it("should return a ConstantCoverage product class for a Mega Coverage product", () => {
     const genericProduct = new Product('Mega Coverage', 0, 80)
     const product = CoverageAssigner(genericProduct);
     expect(product.constructor.name).equal('ConstantCoverage');
   })
   it("should return a generic product class for an unknown product", () => {
     const genericProduct = new Product('Foo', 0, 1)
+    const product = CoverageAssigner(genericProduct);
+    expect(product.constructor.name).equal('Product');
+  })
+  it("should return a generic product class for a product with an invalid price", () => {
+    const genericProduct = new Product('Bar', 0, 54)
     const product = CoverageAssigner(genericProduct);
     expect(product.constructor.name).equal('Product');
   })

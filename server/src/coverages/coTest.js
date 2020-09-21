@@ -2,10 +2,7 @@ const { CoverageChecker, CoverageAssigner } = require('./Helpers.js')
 
 class CarInsurance {
   constructor(products = []) {
-    this.products = products.map(product => {
-      if (CoverageChecker(product))
-        return CoverageAssigner(product)
-    })
+    this.products = products.map(CoverageAssigner)
   }
   updatePrice() {
     this.products.forEach(product => product.updateAttributes && product.updateAttributes())

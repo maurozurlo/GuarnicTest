@@ -1,14 +1,16 @@
-## Guarnic Challenge por Mauro Zurlo
+# Guarnic Challenge por Mauro Zurlo
 
 ## Desc
 Implementación de una calculadora de precios para una aseguradora de autos, con un servidor en Node.js y un frontend en React
 
 ## Start
-Para iniciar el servidor
-- `cd server` y después `npm run start`
+Instalar dependencias en ambos directorios 'server' y 'client' con `npm i`
+Despues, para iniciar el servidor
+- `npm run start`
 
 Para iniciar el cliente
-- `cd client` y después `npm run start`
+- `npm run start`
+`Nota importante`: debido a limitaciones del componente de paginación usado, los días se muestran empezando en índice 1 cuando realmente empiezan en 0 (al igual que en products_after_30_days.txt), por lo que para comparar con el archivo se debe pensar en lo mostrado en el frontend como un día más del que realmente es.
 
 ## Comandos adicionales en servidor
 - `test` para correr tests

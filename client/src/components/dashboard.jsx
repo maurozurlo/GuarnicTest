@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 // Antd
-import { Button, Divider } from 'antd'
+import { Pagination, Button, Divider } from 'antd'
 import { LoadingOutlined, CaretLeftOutlined, CaretRightOutlined } from '@ant-design/icons'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine } from 'recharts'
 import { useTheme } from 'guarnic/hooks'
@@ -36,9 +36,14 @@ const GraphContainer = styled.div`
   grid-template-areas:
     'header header header'
     'previous main next';
-  & h2 {
-    grid-area: header;
-    text-align: center;
+  & div {
+    &:nth-of-type(1){
+      grid-area: header;
+      text-align: center;
+    }
+    &:nth-of-type(2){
+      grid-area: main;
+    }
   }
   & span {
     display: flex;
@@ -50,9 +55,6 @@ const GraphContainer = styled.div`
     &:nth-of-type(2) {
       grid-area: next;
     }
-  }
-  & div:first-of-type {
-    grid-area: main;
   }
 `
 const Title = styled.h1`
@@ -72,12 +74,7 @@ const Dashboard = () => {
   const [day, setDay] = useState(0)
 
   const handleClick = (val) =>{
-    if(val === -1 && day === 0){
-      alert("Can't go before day 0")
-      return;
-    }
-    if(day + val < data.length && day + val > 0)
-      setDay(day + val)
+      setDay(val - 1)
   }
   // Api Fetch
   useEffect(() => {
@@ -107,10 +104,17 @@ const Dashboard = () => {
 
       {!dataFetching && dataFound && (
         <GraphContainer>
-          <Subtitle color={theme.global.primary}>Products at day {day}</Subtitle>
-          <span>
-            <Button type='primary' shape='circle' icon={<CaretLeftOutlined />} size='large' onClick={() => handleClick(-1)}/>
-          </span>
+          <div>
+          <Subtitle color={theme.global.primary}>Products at day {day + 1}</Subtitle>
+          <Pagination
+      total={data.length}
+      showQuickJumper
+      size="small"
+      defaultPageSize={1}
+      showTotal={total => `Total ${total} days`}
+      onChange={handleClick}
+    />
+          </div>
           <BarChart
             width={800}
             height={300}
@@ -131,9 +135,6 @@ const Dashboard = () => {
             <Bar dataKey='price' fill={theme.global.primary} />
             <Bar dataKey='sellIn' fill={theme.global.secondary} />
           </BarChart>
-          <span>
-            <Button type='primary' shape='circle' icon={<CaretRightOutlined />} size='large'  onClick={() => handleClick(1)}/>
-          </span>
         </GraphContainer>
       )}
       <Divider />

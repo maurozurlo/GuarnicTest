@@ -4,6 +4,7 @@
   "description": "Software Engineer Test",
   "main": "index.js",
   "scripts": {
+    "after-30-days": "node src/printer.js",
     "dev": "nodemon src/server.js",
     "start": "node src/server.js",
     "test": "mocha \"spec/**/*.spec.js\""

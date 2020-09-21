@@ -20,8 +20,8 @@ class IncreasingCoverage extends ExpiringProduct {
 // Coverages that increase their value and sellIn at double speed
 // Special Full Coverage
 class IncreasingCoverageDouble extends IncreasingCoverage {
-  constructor(name, price, sellIn, maxSellingPrice) {
-    super(name, price, sellIn, maxSellingPrice)
+  constructor(name, price, sellIn) {
+    super(name, price, sellIn)
   }
   updatePrice() {
     // Price drops to 0 if coverage is expired

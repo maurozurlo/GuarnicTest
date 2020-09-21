@@ -16,6 +16,8 @@ class Product {
 class ExpiringProduct extends Product {
     constructor(name, sellIn, price) {
         super(name, sellIn, price)
+        this.maxPrice = 50
+        this.minPrice = 0
     }
 
     updateAttributes() {
@@ -26,10 +28,11 @@ class ExpiringProduct extends Product {
 
     clamp() {
         // After the update we cap the price values to a minimum of 0 and a max of 50
-        this.price = Math.max(0, Math.min(this.price, 50))
+        this.price = Math.max(this.minPrice, Math.min(this.price, this.maxPrice))
     }
 
     updatePrice() {
+        // Abstract method to be override
         return;
     }
 }

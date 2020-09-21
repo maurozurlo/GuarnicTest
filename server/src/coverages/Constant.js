@@ -3,10 +3,11 @@ const { Product } = require("./Product.js")
 // Mega Coverage
 class ConstantCoverage extends Product {
   constructor(name, price, sellIn) {
-    super(name, price, sellIn);
+    super(name, price, sellIn)
+    if(this.price !== 80) console.error('Improper price')
   }
   updateAttributes() {
-    //This is a constant coverage
+    //This is reserved for further implementation
     return;
   }
 }

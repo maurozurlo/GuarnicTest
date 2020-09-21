@@ -18,8 +18,8 @@ class DecreasingCoverage extends ExpiringProduct {
     this.price -= 1 * expiredMultiplier;
   }
 }
-// Coverages that increase their value and sellIn at double speed
-// Special Full Coverage
+// Coverages that decrease their value and sellIn at double speed
+// Super Sale
 class DecreasingCoverageDouble extends DecreasingCoverage {
   constructor(name, price, sellIn) {
     super(name, price, sellIn);

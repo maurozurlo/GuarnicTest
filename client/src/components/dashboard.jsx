@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 // Antd
-import { Pagination, Button, Divider } from 'antd'
+import { Pagination, Button, Divider, Alert } from 'antd'
 import { LoadingOutlined, CaretLeftOutlined, CaretRightOutlined } from '@ant-design/icons'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine } from 'recharts'
 import { useTheme } from 'guarnic/hooks'
 // API
-import { getData } from '../handlers/api'
+import { getData, baseUrl } from '../handlers/api'
 // Styled components
 const Wrapper = styled.div`
   background-color: ${({ backgroundColor }) => backgroundColor};
@@ -70,7 +70,7 @@ const Dashboard = () => {
   const theme = useTheme()
   const [dataFound, setDataFound] = useState(false)
   const [dataFetching, setDataFetching] = useState(true)
-  const [data, setData] = useState([])
+  const [data, setData] = useState(false)
   const [day, setDay] = useState(0)
 
   const handleClick = (val) =>{
@@ -87,11 +87,8 @@ const Dashboard = () => {
           setData(res);
         } else {
           setDataFound(false)
-        }
-      })
-      .catch(error => {
-        setDataFound(false)
-        console.log(`Error fetching data: ${error}`)})
+          console.log(`Error fetching data: ${res}`)}
+        })
   }, [])
 
   return (
@@ -100,7 +97,7 @@ const Dashboard = () => {
         <Title color={theme.global.greyLight}>Car Insurance</Title>
       </Header>
       {dataFetching && (<LoadingOutlined style={{ fontSize: 58, padding: '1.5em' }} spin />)}
-      {!dataFetching && !dataFound && (<p>Error fetching data</p>)}
+      {!dataFetching && !dataFound && (<Alert style={{ marginTop:'1em'}} message={`There was a problem fetching the data. Please make sure the server is up at ${baseUrl}.`} banner type="error"/>)}
 
       {!dataFetching && dataFound && (
         <GraphContainer>

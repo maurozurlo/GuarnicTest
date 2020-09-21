@@ -9,8 +9,8 @@ const getData = async () => {
     const response = await axios.get(`${route}/test-data`)
     return response.data
   } catch (error) {
-    return []
+    return error.data
   }
 }
 
-export { getData }
+export { getData, baseUrl }
